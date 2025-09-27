@@ -41,7 +41,8 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun LoginScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    initialUserData: UserData? = null
 ) {
     var email by remember { mutableStateOf("ladiesman217@gmail.com") }
     var password by remember { mutableStateOf("••••••") }
@@ -137,7 +138,7 @@ fun LoginScreen(
 
                 TextButton(
                     onClick = {
-                        navController.navigate("RegisterScreen")
+                        navController.navigate("RegisterScreenRoute")
                     },
                     modifier = Modifier.offset(y = (-40).dp)
                 ) {

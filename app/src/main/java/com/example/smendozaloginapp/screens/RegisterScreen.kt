@@ -1,5 +1,6 @@
 package com.example.smendozaloginapp.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -148,7 +149,14 @@ fun RegisterScreen(
                     Spacer(modifier = Modifier.height(32.dp))
 
                     Button(
-                        onClick = {},
+                        onClick = {
+                            val newEmail = email // El email que se acaba de registrar
+                            val userData = UserData(email = newEmail)
+
+                            navController.navigate(LoginScreenRoute(userData = userData)) {
+                                popUpTo<LoginScreenRoute> { inclusive = true }
+                            }
+                        },
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
                         modifier = Modifier
                             .fillMaxWidth()
@@ -166,8 +174,8 @@ fun RegisterScreen(
 
             TextButton(
                 onClick = {
-                    navController.navigate("LoginScreen"){
-                        popUpTo("LoginScreen") { inclusive = true }
+                    navController.navigate(LoginScreenRoute()) {
+                        popUpTo<LoginScreenRoute> { inclusive = true }
                     }
                 },
                 modifier = Modifier.offset(y= (-40).dp)
