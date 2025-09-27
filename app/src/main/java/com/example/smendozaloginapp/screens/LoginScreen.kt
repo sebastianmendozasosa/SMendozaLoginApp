@@ -46,22 +46,15 @@ fun LoginScreen(
     var email by remember { mutableStateOf("ladiesman217@gmail.com") }
     var password by remember { mutableStateOf("••••••") }
 
-    Scaffold (
+    Scaffold(
         topBar = {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
                     .background(Color.Black)
-            ){
-                Image(
-                    painter = painterResource(id = com.example.smendozaloginapp.R.drawable.logo),
-                    contentDescription = "Logo",
-                    modifier = Modifier
-                        .align(Alignment.TopCenter)
-                        .padding(top = 40.dp)
-                        .size(50.dp)
-                )
+            ) {
+
             }
         }
     ) { paddingValues ->
@@ -78,7 +71,7 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .offset(y = (-40).dp)
-            ){
+            ) {
                 Column(
                     modifier = Modifier
                         .padding(horizontal = 32.dp, vertical = 40.dp),
@@ -108,7 +101,7 @@ fun LoginScreen(
 
                     TextField(
                         value = password,
-                        onValueChange = { password = it},
+                        onValueChange = { password = it },
                         label = { Text("Password") },
                         visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -138,23 +131,24 @@ fun LoginScreen(
                             color = Color.White
                         )
 
-                    Spacer(modifier = Modifier.height(60.dp))
+                        Spacer(modifier = Modifier.height(60.dp))
+                    }
+                }
+
+                TextButton(
+                    onClick = {
+                        navController.navigate("RegisterScreen")
+                    },
+                    modifier = Modifier.offset(y = (-40).dp)
+                ) {
+                    Text(
+                        text = "Don't have an account? Sign up",
+                        color = Color.Black
+                    )
                 }
             }
 
-            TextButton(
-                onClick = {
-                    navController.navigate("RegisterScreen")
-                },
-                modifier = Modifier.offset(y = (-40).dp)
-            ) {
-                Text(
-                    text = "Don't have an account? Sign up",
-                    color = Color.Black
-                )
-            }
         }
 
     }
-
 }
