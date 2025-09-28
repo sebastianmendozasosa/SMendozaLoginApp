@@ -7,13 +7,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.smendozaloginapp.screens.LoginScreenRoute
 import com.example.smendozaloginapp.ui.theme.SMendozaLoginAppTheme
+import androidx.navigation.toRoute
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.example.smendozaloginapp.screens.LoginScreen
+import com.example.smendozaloginapp.screens.RegisterScreen
+import com.example.smendozaloginapp.screens.RegisterScreenRoute
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SMendozaLoginAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+                    AppNavigation(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -30,25 +36,40 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = "LoginScreen",
+        startDestination = LoginScreenRoute::class
     ) {
+        composable<LoginScreenRoute>{ backStackEntry ->
+            val route : LoginScreenRoute = backStackEntry.toRoute()
+
+            LoginScreen(
+                navController = navController,
+                initialUserData = route.userData
+            )
+        }
+
+        composable<RegisterScreenRoute>{
+            RegisterScreen(navController = navController)
+        }
 
     }
-    )
 
 
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    showSystemUi = true
+)
+
+
 @Composable
 fun GreetingPreview() {
     SMendozaLoginAppTheme {
-
-
+        AppNavigation()
     }
 }

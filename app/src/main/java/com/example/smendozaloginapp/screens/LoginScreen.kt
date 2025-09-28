@@ -44,7 +44,7 @@ fun LoginScreen(
     navController: NavHostController,
     initialUserData: UserData? = null
 ) {
-    var email by remember { mutableStateOf("ladiesman217@gmail.com") }
+    var email by remember { mutableStateOf(initialUserData?.email ?: "ladiesman217@gmail.com") }
     var password by remember { mutableStateOf("••••••") }
 
     Scaffold(
@@ -138,7 +138,7 @@ fun LoginScreen(
 
                 TextButton(
                     onClick = {
-                        navController.navigate("RegisterScreenRoute")
+                        navController.navigate(RegisterScreenRoute)
                     },
                     modifier = Modifier.offset(y = (-40).dp)
                 ) {
